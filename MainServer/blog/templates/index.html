@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Intrusion Alert Log</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: sans-serif;
+            background-color: #E0E0E0;
+        }
+
+        .header {
+            background-color: #FFEB3B;
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 20px;
+            color: black;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding-bottom: 80px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .card img {
+            width: 100%;
+            height: auto;
+            display: block;
+            background: #eee;
+        }
+
+        .card-body {
+            padding: 15px;
+        }
+
+        .title {
+            color: #D32F2F;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .date {
+            color: #757575;
+            font-size: 12px;
+            margin-bottom: 8px;
+        }
+
+        .meta {
+            color: #666;
+            font-size: 12px;
+            margin-top: 5px;
+            font-family: monospace;
+        }
+
+        .nav-bar {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: #6200EE;
+            padding: 10px;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .nav-btn {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 4px;
+        }
+
+        .btn-sync {
+            background: #BB86FC;
+        }
+
+        .btn-report {
+            background: #03DAC5;
+            color: black;
+        }
+
+        .btn-logout {
+            background: #CF6679;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">Intrusion Alert Log</div>
+
+    <div class="container">
+        {% for post in posts %}
+        <div class="card">
+            <div class="card-body">
+                <div class="title">{{ post.title }}</div>
+                <div class="date">{{ post.created_date|date:"Y-m-d H:i:s" }}</div>
+            </div>
+            {% if post.image %}
+            <img src="{{ post.image.url }}" alt="{{ post.title }}">
+            {% endif %}
+            <div class="card-body">
+                <div>{{ post.text }}</div>
+                <div class="meta">Conf: {{ post.confidence|default:"N/A" }} | Box: {{ post.bbox|default:"N/A" }}</div>
+            </div>
+        </div>
+        {% empty %}
+        <div style="text-align: center; padding: 20px;">No intrusions detected.</div>
+        {% endfor %}
+    </div>
+
+    <div class="nav-bar">
+        <a href="{% url 'index' %}" class="nav-btn btn-sync">SYNC</a>
+        <a href="{% url 'report' %}" class="nav-btn btn-report">REPORT</a>
+        <a href="{% url 'logout' %}" class="nav-btn btn-logout">LOGOUT</a>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,43 @@
+# Byte-compiled / optimized / compiled files
+__pycache__/
+*.pyc
+*.pyd
+*.pyo
+*.egg
+*.egg-info/
+
+# Virtual environment
+venv/
+env/
+.venv/
+.env/
+
+# Database
+db.sqlite3
+
+# Media and Static files (if uploaded/generated during runtime)
+media/
+static_collected/ # If using collectstatic to a dedicated directory
+
+# IDE-specific files (e.g., PyCharm)
+.idea/
+*.iml
+.vscode/
+
+# Operating System files
+.DS_Store
+Thumbs.db
+
+# Django specific
+# Secret key and other sensitive settings
+local_settings.py
+settings_local.py
+*.env
+
+# Logs
+*.log
+
+# Test and coverage files
+.coverage
+htmlcov/
+.pytest_cache/
